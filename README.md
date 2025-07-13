@@ -1,93 +1,93 @@
-# Deepgram AI Agent Technical Demo
+# AI Customer Executive
 
-Combine Text-to-Speech and Speech-to-Text into a conversational agent.
+**AI Customer Executive** is a production-grade, next-generation conversational AI system built to automate **human-like voice conversations** over phone calls. Designed for real-time, intelligent interactions, this system integrates seamlessly with **Asterisk-like telecom servers** for global scalability and deployment.
 
-> Project codename EmilyAI
+---
 
-[![Discord](https://dcbadge.vercel.app/api/server/xWRaCDBtW4?style=flat)](https://discord.gg/xWRaCDBtW4)
+## Core Capabilities
 
-The purpose of this demo is to showcase how you can build a Conversational AI application that engages users in natural language interactions, mimicking human conversation through natural language processing using [Deepgram](https://deepgram.com/).
+- **Real-Time Conversation**: Instant speech-to-text (STT) and text-to-speech (TTS) using [Deepgram](https://deepgram.com)
+- **LLM-Powered Responses**: Uses **OpenAI GPT-4o** for natural and human-like responses
+- **Phone Call Automation**: Compatible with **Asterisk** or similar VoIP infrastructures
+- **Ultra Low Latency**: Less than **25ms** from audio input to AI response
+- **AI Intelligence Layer**:
+  - Extracts sentiment, objective, motive, and response context
+  - Stores entire conversation in structured **JSON** format
+- **End-to-End Interaction Flow**: Handles sales pitching, Q&A, and post-sale customer service
 
-Examples of where you would see this type of application include: virtual assistants for tasks like answering queries and controlling smart devices, educational tutors for personalized learning, healthcare advisors for medical information, and entertainment chat bots for engaging conversations and games.
+---
 
-These applications aim to enhance user experiences by offering efficient and intuitive interactions, reducing the need for human intervention in various tasks and services.
+## Design & Architecture
 
-## Issue Reporting
+Built using a **Bottom-Up Development Approach** and **SOLID Principles** for scalability and performance.
 
-If you have found a bug or if you have a feature request, please report them at this repository issues section. Please do not report security vulnerabilities on the public GitHub issue tracker.
+### LLD Principles Implemented
 
-Check out our [KNOWN ISSUES](./KNOWN_ISSUES.md) before reporting.
+- **Single Responsibility Principle (SRP)**  
+  Each module—like STT handler, TTS handler, authentication middleware, and response generation—has one focused responsibility.
 
-## Demo features
+- **Interface Segregation Principle (ISP)**  
+  Components are designed with decoupled interfaces so that STT, TTS, AI logic, and storage logic can evolve independently.
 
-- Capture streaming audio using [Deepgram Streaming Speech to Text](https://developers.deepgram.com/docs/getting-started-with-live-streaming-audio).
-- Natural Language responses using an OpenAI LLM.
-- Speech to Text conversion using [Deepgram Aura Text to Speech](https://developers.deepgram.com/docs/text-to-speech).
+- **Bottom-Up Architecture**  
+  The system is built starting from the foundational streaming pipeline and scaling up to full conversation orchestration and data logging.
 
-## What is Deepgram?
+### Modular Overview
 
-[Deepgram](https://deepgram.com/) is a foundational AI company providing speech-to-text and language understanding capabilities to make data readable and actionable by human or machines.
+| Module                  | Responsibility                                   |
+|------------------------|--------------------------------------------------|
+| `/lib/authMiddleware`  | JWT-based route authentication                   |
+| `/api/auth/deepgram`   | On-demand Deepgram token provisioning            |
+| `WebSocket handler`    | Streams real-time audio for processing           |
+| `OpenAI GPT-4o Layer`  | Handles dynamic response generation              |
+| `Conversation Parser`  | Extracts and classifies metadata from dialogue   |
 
-## Sign-up to Deepgram
+---
 
-Want to start building using this project? [Sign-up now for Deepgram and create an API key](https://console.deepgram.com/signup?jump=keys).
+Flowchart:
+<img width="1890" height="370" alt="image" src="https://github.com/user-attachments/assets/4f893a8b-c4b7-4606-bfa4-6e870dcfae72" />
 
-## Quickstart
+---
 
-### Manual
+## Business Use Cases
 
-Follow these steps to get started with this starter application.
+- **Sales Automation**: Cold calls with persuasive dialogue generated on-the-fly
+- **Customer Support**: Post-sale inquiries and service automation
+- **User Analytics**: Record and analyze conversations for insights and improvement
+- **CRM/Database Integration**: Store conversation metadata in any database like MongoDB, Firebase, or PostgreSQL
 
-#### Clone the repository
+---
 
-Go to GitHub and [clone the repository](https://github.com/deepgram-starters/live-nextjs-starter).
+## Technology Stack
 
-#### Install dependencies
+- **Next.js** with App Router
+- **OpenAI GPT-4o** for LLM-based responses
+- **Deepgram** for STT and TTS
+- **WebSockets** for low-latency streaming
+- **JWT** for secure authentication
+- **Vercel** for deployment
 
-Install the project dependencies.
+---
 
-```bash
-npm install
+## Production-Ready Features
+
+- Real-time processing and response within 25ms
+- Authentication with JWT
+- Sentiment and motive-aware AI
+- Global scalability via cloud infrastructure
+- Structured logs for training, fine-tuning, and analytics
+
+---
+
+##Hosted On:
+https://ai-customer-executive-prishal-ai-in.vercel.app
+
+## Add On:
 ```
-
-#### Edit the config file
-
-Copy the code from `sample.env.local` and create a new file called `.env.local`.
-
-```bash
 DEEPGRAM_STT_DOMAIN=https://api.deepgram.com
-DEEPGRAM_API_KEY=YOUR-DG-API-KEY
-OPENAI_API_KEY=YOUR-OPENAI-API-KEY
+DEEPGRAM_API_KEY=Your API Key Here
+NEXT_PUBLIC_DEEPGRAM_SOCKET_URL=wss://agent.deepgram.com/v1/agent/converse
 DEEPGRAM_ENV=development or production
 JWT_SECRET=YOUR-JWT-SECRET
 ```
 
-1. For `DEEPGRAM_API_KEY` paste in the key you generated in the [Deepgram Console](https://console.deepgram.com/).
-2. Set `DEEPGRAM_STT_DOMAIN` to be `https://api.deepgram.com`.
-3. The`OPENAI_API_KEY` should be an OpenAI API Key that can access the chat completions API.
-4. For `DEEPGRAM_ENV`: This is a custom environment variable specific to this application and is used to determine how API keys are handled. In development mode, it uses the API key directly from the environment. In production, it would create temporary API keys for each session.
-5. For `JWT_SECRET`: This is used for JSON Web Token (JWT) authentication. The application uses this for: Generating authentication tokens when users first visit. Verifying tokens for protected API routes and securing the WebSocket connection
-
-#### Run the application
-
-Once running, you can [access the application in your browser](http://localhost:3000).
-
-```bash
-npm run dev
-```
-
-## Getting Help
-
-We love to hear from you so if you have questions, comments or find a bug in the project, let us know! You can either:
-
-- [Open an issue in this repository](https://github.com/deepgram-devs/deepgram-aura-tts-demo/issues)
-- [Join the Deepgram Github Discussions Community](https://github.com/orgs/deepgram/discussions)
-- [Join the Deepgram Discord Community](https://discord.gg/xWRaCDBtW4)
-
-## Author
-
-[Deepgram](https://deepgram.com)
-
-## License
-
-This project is licensed under the MIT license. See the [LICENSE](./LICENSE) file for more info.
