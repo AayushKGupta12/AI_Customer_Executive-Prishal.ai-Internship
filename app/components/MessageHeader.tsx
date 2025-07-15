@@ -10,7 +10,7 @@ const AgentMessageHeader = ({
   if (message.role === "assistant") {
     return (
       <div className="flex items-center space-x-2 rtl:space-x-reverse">
-        <span className="text-sm font-semibold text-white">Thalia Voice</span>
+        <span className="text-sm font-semibold text-white">Assistant</span>
         <span className="text-xs font-normal text-gray-400">
           {moment().calendar()}
         </span>
