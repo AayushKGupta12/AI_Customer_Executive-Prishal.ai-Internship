@@ -19,7 +19,7 @@ export const InitialLoadAgent = ({
           className="relative block w-full glass p-6 sm:p-8 lg:p-12 rounded-xl"
         >
           <h2 className="font-favorit mt-2 block font-bold text-xl text-gray-100">
-            Prishal.Ai - Demo Project
+            AAYUSH.Ai - Demo Project
           </h2>
           <span className="mt-2 block text-sm text-gray-100/70">
             <Headphones /> For optimal responce, we recommend using headphones
